@@ -1,0 +1,53 @@
+plugins {
+    id 'maven-publish'
+}
+
+def groupName = 'tencent.odcfrontend'
+
+// AAR 文件名前缀 → artifactId 的映射表
+// 新增 AAR 时只需在这里加一行
+def artifactMap = [
+    'MintegralAdapter' : 'mintegraladapter',
+    'PangleAdapter'    : 'pangleadapter',
+    'TAN_SDK'          : 'tan-sdk',
+]
+
+// 自动扫描所有文件夹（如 1.5.1/），从 AAR 文件名提取真实版本号
+// 例如 PangleAdapter-6.4.0.6.aar → artifactId=pangleadapter, version=6.4.0.6
+publishing {
+    publications {
+        projectDir.listFiles().findAll { it.isDirectory() && it.name ==~ /\d+\.\d+\.\d+.*/ }.each { versionDir ->
+            versionDir.listFiles().findAll { it.name.endsWith('.aar') }.each { aarFile ->
+                def baseName = aarFile.name.replace('.aar', '')
+                def matchedKey = artifactMap.keySet().find { baseName.startsWith(it) }
+
+                if (matchedKey) {
+                    def artifactId = artifactMap[matchedKey]
+                    // 从文件名提取版本号：去掉前缀和连接符
+                    def realVersion = baseName.substring(matchedKey.length()).replaceFirst(/^[-_]/, '')
+                    def pubName = "${artifactId}${realVersion}".replaceAll('[^a-zA-Z0-9]', '')
+
+                    create(pubName, MavenPublication) {
+                        it.groupId = groupName
+                        it.artifactId = artifactId
+                        it.version = realVersion
+                        it.artifact(aarFile) {
+                            extension = 'aar'
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'GitHubPackages'
+            url = uri("https://maven.pkg.github.com/odcfrontend/TAN_Android_Maven")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USER")
+                password = project.findProperty("gpr.token") ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+}
