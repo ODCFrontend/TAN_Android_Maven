@@ -32,7 +32,7 @@
 │  1. 将 AAR 放入版本文件夹（如 1.5.1/）                     │
 │  2. 执行 ./gradlew publish                               │
 │  3. AAR 自动发布到 GitHub Packages                        │
-│  4. 在仓库 Settings 管理开发者访问权限                      │
+│  4. 为开发者生成 Token 并分发                              │
 └────────────────────────┬─────────────────────────────────┘
                          │ publish
                          ▼
@@ -48,8 +48,8 @@
 ┌──────────────────────────────────────────────────────────┐
 │                   授权开发者                               │
 │                                                          │
-│  1. 接受仓库邀请                                          │
-│  2. 创建 read:packages Token                              │
+│  1. 从管理员处获取账号名和 Token                           │
+│  2. 在 gradle.properties 中配置凭证                       │
 │  3. 在 build.gradle 中添加 Maven 仓库 + 依赖              │
 │  4. Gradle Sync 即可使用                                  │
 └──────────────────────────────────────────────────────────┘
@@ -172,21 +172,24 @@ Token 需要 **`write:packages`** 和 **`read:packages`** 权限。
 
 ## 四、权限管理（管理员）
 
-### 4.1 授权开发者
+### 4.1 为开发者生成 Token
 
-1. 打开 `https://github.com/ODCFrontend/TAN_Android_Maven/settings/access`
-2. 点击 **Add people**
-3. 输入对方 GitHub 用户名，角色选择 **Read**
+1. 登录我方 GitHub 账号
+2. 前往 [Personal Access Tokens](https://github.com/settings/tokens) 页面
+3. 点击 **Generate new token (classic)**
+4. 勾选 **`read:packages`** 权限
+5. 设置合适的过期时间
+6. 生成后将**账号名**和 **Token** 提供给开发者
 
 ### 4.2 撤销授权
 
-在同一页面移除协作者，对方立即失去下载权限。
+在 [Tokens](https://github.com/settings/tokens) 页面删除对应开发者的 Token，对方立即失去下载权限。
 
 ### 4.3 权限模型
 
 ```
-仓库 Owner（你）     →  可发布、可管理权限
-Read 协作者（开发者） →  仅可下载，无法发布、无法看到源码（如仓库为 private）
+仓库 Owner（我方）   →  可发布、可管理权限、可生成/撤销 Token
+授权开发者            →  使用我方提供的凭证，仅可下载包
 未授权用户            →  完全不可见
 ```
 
@@ -196,10 +199,18 @@ Read 协作者（开发者） →  仅可下载，无法发布、无法看到源
 
 ### 5.1 前置条件
 
-- 已接受仓库管理员的 GitHub 邀请
-- 已创建 [Personal Access Token](https://github.com/settings/tokens)，勾选 **`read:packages`**
+- 已从管理员处获取 **GitHub 账号名** 和 **Token**
 
-### 5.2 配置 Maven 仓库
+### 5.2 配置凭证
+
+在项目根目录的 `gradle.properties` 中添加（**不要提交到 Git**）：
+
+```properties
+gpr.user=管理员提供的账号名
+gpr.token=管理员提供的Token
+```
+
+### 5.3 配置 Maven 仓库
 
 在项目 `settings.gradle` 中添加：
 
@@ -220,14 +231,7 @@ dependencyResolutionManagement {
 }
 ```
 
-在 `gradle.properties` 中配置凭证（**不要提交到 Git**）：
-
-```properties
-gpr.user=开发者的GitHub用户名
-gpr.token=开发者的GitHub Token
-```
-
-### 5.3 添加依赖
+### 5.4 添加依赖
 
 ```groovy
 dependencies {
@@ -237,7 +241,7 @@ dependencies {
 }
 ```
 
-### 5.4 Sync & 使用
+### 5.5 Sync & 使用
 
 点击 Android Studio **Sync Now**，完成接入。
 
