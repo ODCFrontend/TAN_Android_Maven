@@ -25,7 +25,7 @@ publishing {
                     def artifactId = artifactMap[matchedKey]
                     // 从文件名提取版本号：去掉前缀和连接符
                     def realVersion = baseName.substring(matchedKey.length()).replaceFirst(/^[-_]/, '')
-                    def pubName = "${artifactId}${realVersion}".replaceAll('[^a-zA-Z0-9]', '')
+                    def pubName = "${artifactId}${versionDir.name}${realVersion}".replaceAll('[^a-zA-Z0-9]', '')
 
                     create(pubName, MavenPublication) {
                         it.groupId = groupName
