@@ -7,8 +7,8 @@ def groupName = 'com.adsurge.mediation'
 // AAR 文件名前缀 → artifactId 的映射表
 // 新增 AAR 时只需在这里加一行
 def artifactMap = [
-    'MintegralAdapter' : 'mintegraladapter',
-    'PangleAdapter'    : 'pangleadapter',
+    'MintegralAdapter' : 'mintegral-adapter',
+    'PangleAdapter'    : 'pangle-adapter',
     'TAN_SDK'          : 'tan-sdk',
 ]
 

@@ -40,8 +40,8 @@
 │              GitHub Packages (Maven Registry)             │
 │                                                          │
 │  com.adsurge.mediation:tan-sdk:1.5.1                       │
-│  com.adsurge.mediation:mintegraladapter:17.0.31            │
-│  com.adsurge.mediation:pangleadapter:6.4.0.6               │
+│  com.adsurge.mediation:mintegral-adapter:17.0.31           │
+│  com.adsurge.mediation:pangle-adapter:6.4.0.6              │
 └────────────────────────┬─────────────────────────────────┘
                          │ implementation '...'
                          ▼
@@ -91,8 +91,8 @@ def groupName = 'com.adsurge.mediation'
 
 // AAR 文件名前缀 → artifactId 映射表
 def artifactMap = [
-    'MintegralAdapter' : 'mintegraladapter',
-    'PangleAdapter'    : 'pangleadapter',
+    'MintegralAdapter' : 'mintegral-adapter',
+    'PangleAdapter'    : 'pangle-adapter',
     'TAN_SDK'          : 'tan-sdk',
 ]
 
@@ -236,8 +236,8 @@ dependencyResolutionManagement {
 ```groovy
 dependencies {
     implementation 'com.adsurge.mediation:tan-sdk:1.5.1'
-    implementation 'com.adsurge.mediation:mintegraladapter:17.0.31'
-    implementation 'com.adsurge.mediation:pangleadapter:6.4.0.6'
+    implementation 'com.adsurge.mediation:mintegral-adapter:17.0.31'
+    implementation 'com.adsurge.mediation:pangle-adapter:6.4.0.6'
 }
 ```
 
@@ -252,8 +252,8 @@ dependencies {
 | groupId | artifactId | 版本 | 说明 |
 |---|---|---|---|
 | `com.adsurge.mediation` | `tan-sdk` | 1.5.1 | TAN SDK 主库 |
-| `com.adsurge.mediation` | `mintegraladapter` | 17.0.31 | Mintegral 广告适配器 |
-| `com.adsurge.mediation` | `pangleadapter` | 6.4.0.6 | Pangle 广告适配器 |
+| `com.adsurge.mediation` | `mintegral-adapter` | 17.0.31 | Mintegral 广告适配器 |
+| `com.adsurge.mediation` | `pangle-adapter` | 6.4.0.6 | Pangle 广告适配器 |
 
 包管理页面：https://github.com/ODCFrontend?tab=packages
 
