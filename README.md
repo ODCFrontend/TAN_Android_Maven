@@ -39,9 +39,9 @@
 ┌──────────────────────────────────────────────────────────┐
 │              GitHub Packages (Maven Registry)             │
 │                                                          │
-│  tencent.odcfrontend:tan-sdk:1.5.1                         │
-│  tencent.odcfrontend:mintegraladapter:17.0.31              │
-│  tencent.odcfrontend:pangleadapter:6.4.0.6                 │
+│  com.adsurge.mediation:tan-sdk:1.5.1                       │
+│  com.adsurge.mediation:mintegraladapter:17.0.31            │
+│  com.adsurge.mediation:pangleadapter:6.4.0.6               │
 └────────────────────────┬─────────────────────────────────┘
                          │ implementation '...'
                          ▼
@@ -87,7 +87,7 @@ plugins {
     id 'maven-publish'
 }
 
-def groupName = 'tencent.odcfrontend'
+def groupName = 'com.adsurge.mediation'
 
 // AAR 文件名前缀 → artifactId 映射表
 def artifactMap = [
@@ -231,9 +231,9 @@ gpr.token=开发者的GitHub Token
 
 ```groovy
 dependencies {
-    implementation 'tencent.odcfrontend:tan-sdk:1.5.1'
-    implementation 'tencent.odcfrontend:mintegraladapter:17.0.31'
-    implementation 'tencent.odcfrontend:pangleadapter:6.4.0.6'
+    implementation 'com.adsurge.mediation:tan-sdk:1.5.1'
+    implementation 'com.adsurge.mediation:mintegraladapter:17.0.31'
+    implementation 'com.adsurge.mediation:pangleadapter:6.4.0.6'
 }
 ```
 
@@ -247,9 +247,9 @@ dependencies {
 
 | groupId | artifactId | 版本 | 说明 |
 |---|---|---|---|
-| `tencent.odcfrontend` | `tan-sdk` | 1.5.1 | TAN SDK 主库 |
-| `tencent.odcfrontend` | `mintegraladapter` | 17.0.31 | Mintegral 广告适配器 |
-| `tencent.odcfrontend` | `pangleadapter` | 6.4.0.6 | Pangle 广告适配器 |
+| `com.adsurge.mediation` | `tan-sdk` | 1.5.1 | TAN SDK 主库 |
+| `com.adsurge.mediation` | `mintegraladapter` | 17.0.31 | Mintegral 广告适配器 |
+| `com.adsurge.mediation` | `pangleadapter` | 6.4.0.6 | Pangle 广告适配器 |
 
 包管理页面：https://github.com/ODCFrontend?tab=packages
 
