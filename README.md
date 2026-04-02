@@ -39,9 +39,17 @@
 ┌──────────────────────────────────────────────────────────┐
 │              GitHub Packages (Maven Registry)             │
 │                                                          │
-│  com.adsurge.mediation:tan-sdk:1.5.1                       │
-│  com.adsurge.mediation:mintegral-adapter:17.0.31           │
-│  com.adsurge.mediation:pangle-adapter:6.4.0.6              │
+│  com.adsurge.mediation:tan-sdk:1.5.2                       │
+│  com.adsurge.mediation:admob-adapter:25.0.0                │
+│  com.adsurge.mediation:applovin-adapter:13.5.1             │
+│  com.adsurge.mediation:bigo-adapter:5.7.1                  │
+│  com.adsurge.mediation:inmobi-adapter:11.1.1               │
+│  com.adsurge.mediation:meta-adapter:6.21.0                 │
+│  com.adsurge.mediation:mintegral-adapter:17.0.91           │
+│  com.adsurge.mediation:pangle-adapter:7.9.1.0              │
+│  com.adsurge.mediation:serafino-adapter:1.6.0              │
+│  com.adsurge.mediation:util:1.5.2                          │
+│  com.adsurge.mediation:vungle-adapter:7.7.0                │
 └────────────────────────┬─────────────────────────────────┘
                          │ implementation '...'
                          ▼
@@ -64,13 +72,20 @@ TAN_Android_Maven/
 ├── build.gradle          # 自动扫描 + 发布脚本
 ├── gradle.properties     # 管理员凭证（不提交到 Git）
 ├── settings.gradle
-├── 1.5.1/                # 版本文件夹
-│   ├── TAN_SDK-1.5.1.aar
-│   ├── MintegralAdapter-17.0.31.aar
-│   └── PangleAdapter-6.4.0.6.aar
-├── 1.6.0/                # 新版本只需新建文件夹
-│   ├── TAN_SDK-1.6.0.aar
-│   └── ...
+├── 1.5.0/                # 版本文件夹
+│   ├── TAN_SDK-1.5.0.aar
+│   ├── AdMobAdapter-25.0.0.aar
+│   ├── ApplovinAdapter-13.5.1.aar
+│   ├── BigoAdapter-5.7.1.aar
+│   ├── InMobiAdapter-11.1.1.aar
+│   ├── MetaAdapter-6.21.0.aar
+│   ├── MintegralAdapter-17.0.91.aar
+│   ├── PangleAdapter-7.9.1.0.aar
+│   ├── SerafinoAdapter-1.6.0.aar
+│   ├── Util-1.5.0.aar
+│   └── VungleAdapter-7.7.0.aar
+├── 1.5.1/
+├── 1.5.2/
 └── README.md
 ```
 
@@ -91,9 +106,17 @@ def groupName = 'com.adsurge.mediation'
 
 // AAR 文件名前缀 → artifactId 映射表
 def artifactMap = [
-    'MintegralAdapter' : 'mintegral-adapter',
-    'PangleAdapter'    : 'pangle-adapter',
-    'TAN_SDK'          : 'tan-sdk',
+    'AdMobAdapter'      : 'admob-adapter',
+    'ApplovinAdapter'   : 'applovin-adapter',
+    'BigoAdapter'       : 'bigo-adapter',
+    'InMobiAdapter'     : 'inmobi-adapter',
+    'MetaAdapter'       : 'meta-adapter',
+    'MintegralAdapter'  : 'mintegral-adapter',
+    'PangleAdapter'     : 'pangle-adapter',
+    'SerafinoAdapter'   : 'serafino-adapter',
+    'TAN_SDK'           : 'tan-sdk',
+    'Util'              : 'util',
+    'VungleAdapter'     : 'vungle-adapter',
 ]
 
 publishing {
@@ -235,9 +258,17 @@ dependencyResolutionManagement {
 
 ```groovy
 dependencies {
-    implementation 'com.adsurge.mediation:tan-sdk:1.5.1'
-    implementation 'com.adsurge.mediation:mintegral-adapter:17.0.31'
-    implementation 'com.adsurge.mediation:pangle-adapter:6.4.0.6'
+    implementation 'com.adsurge.mediation:tan-sdk:1.5.2'
+    implementation 'com.adsurge.mediation:admob-adapter:25.0.0'
+    implementation 'com.adsurge.mediation:applovin-adapter:13.5.1'
+    implementation 'com.adsurge.mediation:bigo-adapter:5.7.1'
+    implementation 'com.adsurge.mediation:inmobi-adapter:11.1.1'
+    implementation 'com.adsurge.mediation:meta-adapter:6.21.0'
+    implementation 'com.adsurge.mediation:mintegral-adapter:17.0.91'
+    implementation 'com.adsurge.mediation:pangle-adapter:7.9.1.0'
+    implementation 'com.adsurge.mediation:serafino-adapter:1.6.0'
+    implementation 'com.adsurge.mediation:util:1.5.2'
+    implementation 'com.adsurge.mediation:vungle-adapter:7.7.0'
 }
 ```
 
@@ -249,11 +280,19 @@ dependencies {
 
 ## 六、已发布的包
 
-| groupId | artifactId | 版本 | 说明 |
+| groupId | artifactId | 最新版本 | 说明 |
 |---|---|---|---|
-| `com.adsurge.mediation` | `tan-sdk` | 1.5.1 | TAN SDK 主库 |
-| `com.adsurge.mediation` | `mintegral-adapter` | 17.0.31 | Mintegral 广告适配器 |
-| `com.adsurge.mediation` | `pangle-adapter` | 6.4.0.6 | Pangle 广告适配器 |
+| `com.adsurge.mediation` | `tan-sdk` | 1.5.2 | TAN SDK 主库 |
+| `com.adsurge.mediation` | `admob-adapter` | 25.0.0 | AdMob 广告适配器 |
+| `com.adsurge.mediation` | `applovin-adapter` | 13.5.1 | AppLovin 广告适配器 |
+| `com.adsurge.mediation` | `bigo-adapter` | 5.7.1 | Bigo 广告适配器 |
+| `com.adsurge.mediation` | `inmobi-adapter` | 11.1.1 | InMobi 广告适配器 |
+| `com.adsurge.mediation` | `meta-adapter` | 6.21.0 | Meta 广告适配器 |
+| `com.adsurge.mediation` | `mintegral-adapter` | 17.0.91 | Mintegral 广告适配器 |
+| `com.adsurge.mediation` | `pangle-adapter` | 7.9.1.0 | Pangle 广告适配器 |
+| `com.adsurge.mediation` | `serafino-adapter` | 1.6.0 | Serafino 广告适配器 |
+| `com.adsurge.mediation` | `util` | 1.5.2 | 工具库 |
+| `com.adsurge.mediation` | `vungle-adapter` | 7.7.0 | Vungle 广告适配器 |
 
 包管理页面：https://github.com/ODCFrontend?tab=packages
 
