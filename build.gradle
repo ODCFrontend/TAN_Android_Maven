@@ -23,11 +23,18 @@ def artifactMap = [
     'VungleAdapter'     : 'vungle-adapter',
 ]
 
+// 支持 -PonlyVersion=1.5.2-Wesing 只发布指定文件夹，不传则全量发布
+def onlyVersion = project.findProperty('onlyVersion')
+
 // 自动扫描所有文件夹（如 1.5.1/），从 AAR 文件名提取真实版本号
-// 例如 PangleAdapter-6.4.0.6.aar → artifactId=pangleadapter, version=6.4.0.6
+// 例如 PangleAdapter-6.4.0.6.aar → artifactId=pangle-adapter, version=6.4.0.6
 publishing {
     publications {
-        projectDir.listFiles().findAll { it.isDirectory() && it.name ==~ /\d+\.\d+\.\d+.*/ }.each { versionDir ->
+        projectDir.listFiles().findAll {
+            it.isDirectory() && it.name ==~ /\d+\.\d+\.\d+.*/
+        }.findAll {
+            onlyVersion == null || it.name == onlyVersion
+        }.each { versionDir ->
             versionDir.listFiles().findAll { it.name.endsWith('.aar') }.each { aarFile ->
                 def baseName = aarFile.name.replace('.aar', '')
                 def matchedKey = artifactMap.keySet().findAll { baseName.startsWith(it) }.max { it.length() }
