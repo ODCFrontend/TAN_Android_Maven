@@ -11,11 +11,14 @@ def artifactMap = [
     'ApplovinAdapter'   : 'applovin-adapter',
     'BigoAdapter'       : 'bigo-adapter',
     'InMobiAdapter'     : 'inmobi-adapter',
+    'MaxAdapter'        : 'max-adapter',
     'MetaAdapter'       : 'meta-adapter',
     'MintegralAdapter'  : 'mintegral-adapter',
     'PangleAdapter'     : 'pangle-adapter',
     'SerafinoAdapter'   : 'serafino-adapter',
+    'Serafino'          : 'serafino',
     'TAN_SDK'           : 'tan-sdk',
+    'TradPlusAdapter'   : 'tradplus-adapter',
     'Util'              : 'util',
     'VungleAdapter'     : 'vungle-adapter',
 ]
@@ -27,7 +30,7 @@ publishing {
         projectDir.listFiles().findAll { it.isDirectory() && it.name ==~ /\d+\.\d+\.\d+.*/ }.each { versionDir ->
             versionDir.listFiles().findAll { it.name.endsWith('.aar') }.each { aarFile ->
                 def baseName = aarFile.name.replace('.aar', '')
-                def matchedKey = artifactMap.keySet().find { baseName.startsWith(it) }
+                def matchedKey = artifactMap.keySet().findAll { baseName.startsWith(it) }.max { it.length() }
 
                 if (matchedKey) {
                     def artifactId = artifactMap[matchedKey]
